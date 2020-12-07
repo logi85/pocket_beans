@@ -9,12 +9,14 @@ class Adapter {
     companion object {
         @BindingAdapter("imageUrl")
         @JvmStatic
-        fun loadImage(view: ImageView, imageUrl: String) {
-            Picasso.get()
-                .load(imageUrl)
-                .fit()
-                .centerCrop()
-                .into(view)
+        fun loadImage(view: ImageView, imageUrl: String?) {
+            if (imageUrl != null && imageUrl.trim() != "") {
+                Picasso.get()
+                        .load(imageUrl)
+                        .fit()
+                        .centerCrop()
+                        .into(view)
+            }
         }
     }
 }

@@ -7,9 +7,29 @@
 
     <fragment
         android:id="@+id/scheduleFragment"
-        android:name="de.seriousdonkey.pocketbeans.schedule.ui.ScheduleFragment"
+        android:name="de.seriousdonkey.pocketbeans.schedule.ui.overview.ScheduleFragment"
         android:label="fragment_schedule"
-        tools:layout="@layout/fragment_schedule" />
+        tools:layout="@layout/fragment_schedule" >
+
+        <action
+            android:id="@+id/openScheduleDetails"
+            app:destination="@id/scheduleDetailsFragment"
+            app:popUpTo="@id/scheduleFragment"
+            app:enterAnim="@anim/fragment_open_enter"/>
+    </fragment>
+    <fragment
+        android:id="@+id/scheduleDetailsFragment"
+        android:name="de.seriousdonkey.pocketbeans.schedule.ui.details.ScheduleDetailsFragment"
+        android:label="fragment_schedule_details"
+        tools:layout="@layout/fragment_schedule_details" >
+        <argument android:name="scheduleEntry"
+            app:argType="de.seriousdonkey.pocketbeans.schedule.ui.overview.list.ScheduleEntry" />
+
+        <action android:id="@+id/openShowInfo"
+            app:destination="@+id/showInfoFragment"
+            app:popUpTo="@id/scheduleDetailsFragment"
+            app:enterAnim="@anim/fragment_open_enter" />
+    </fragment>
     <fragment
         android:id="@+id/blogFragment"
         android:name="de.seriousdonkey.pocketbeans.blog.ui.BlogFragment"
@@ -17,7 +37,38 @@
         tools:layout="@layout/fragment_blog" />
     <fragment
         android:id="@+id/infoFragment"
-        android:name="de.seriousdonkey.pocketbeans.info.InfoFragment"
+        android:name="de.seriousdonkey.pocketbeans.info.ui.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" />
+
+    <fragment
+        android:id="@+id/mediaLibrayShowOverviewFragment"
+        android:name="de.seriousdonkey.pocketbeans.media_library.ui.show.overview.ShowOverviewFragment"
+        android:label="fragment_show_overview"
+        tools:layout="@layout/fragment_show_overview">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/showInfoFragment"
+        android:name="de.seriousdonkey.pocketbeans.media_library.ui.show.info.ShowInfoFragment"
+        android:label="fragment_show_info"
+        tools:layout="@layout/fragment_show_info">
+
+        <argument android:name="showId" app:argType="integer" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/mediaLibraryFragment"
+        android:name="de.seriousdonkey.pocketbeans.media_library.ui.MediaLibraryFragment"
+        android:label="fragment_media_library"
+        tools:layout="@layout/fragment_media_library">
+
+        <action android:id="@+id/openShowInfo"
+            app:destination="@id/showInfoFragment"
+            app:popUpTo="@layout/fragment_show_overview"
+            app:enterAnim="@anim/fragment_open_enter" />
+
+    </fragment>
+
 </navigation>

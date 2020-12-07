@@ -1,23 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
             name="entry"
-            type="de.seriousdonkey.pocketbeans.schedule.ui.list.ScheduleEntry" />
+            type="de.seriousdonkey.pocketbeans.schedule.ui.overview.list.ScheduleEntry" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
 
         <TextView
+            android:id="@+id/schedule_entry_type"
+            scheduleTypeBackground="@{entry.type}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="fill_vertical"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:rotation="-90"
+            android:text="@{entry.type.typeAsString}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@{entry.title}" />
+            tools:background="@drawable/schedule_live_background"
+            tools:text="LIVE"
+            tools:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/schedule_entry_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@{entry.title}"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@id/schedule_entry_time"
+            app:layout_constraintLeft_toRightOf="@id/schedule_entry_type"
+            app:layout_constraintStart_toEndOf="@id/schedule_entry_type"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/schedule_entry_topic"
+            tools:text="Moin Moin"
+            tools:textColor="@color/black" />
+
+
+        <TextView
+            android:id="@+id/schedule_entry_topic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@{entry.topic}"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/schedule_entry_time"
+            app:layout_constraintLeft_toRightOf="@id/schedule_entry_type"
+            app:layout_constraintStart_toEndOf="@id/schedule_entry_type"
+            app:layout_constraintTop_toBottomOf="@id/schedule_entry_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="Morning Show mit Florentin"
+            tools:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/schedule_entry_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{entry.formattedStartAndEndTime}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            tools:text="10:00 - 11:00"
+            tools:textColor="@color/black" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

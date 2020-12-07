@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Pocket Beans</string>
+    <string name="app_hint">Pocket Beans ist eine inoffizielle App und steht in keiner Verbindung zur Rocket Beans Entertainment GmbH</string>
+
+    <string name="bottom_navigation_schedule">Sendeplan</string>
+    <string name="bottom_navigation_blog">Blog</string>
+    <string name="bottom_navigation_media_library">Mediathek</string>
+    <string name="bottom_navigation_info">Info</string>
+
+    <string name="network_error">Netzwerkfehler</string>
+
+    <string name="media_library_tab_last_episodes">Neue Folgen</string>
+    <string name="media_library_all_shows">Alle Shows</string>
+    
+    <string name="schedule_details_notification_added">Erinnerung hinzugefügt</string>
+    <string name="schedule_details_notification_deleted">Erinnerung gelöscht</string>
 </resources>

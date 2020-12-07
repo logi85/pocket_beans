@@ -1,6 +1,12 @@
 package de.seriousdonkey.pocketbeans.app.modules
 
+import android.app.AlarmManager
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.job.JobScheduler
 import android.content.Context
+import android.content.Intent
+import androidx.work.WorkManager
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -31,6 +37,12 @@ class AppModule {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun providesWorkManager(context: Context) : WorkManager {
+        return WorkManager.getInstance(context)
     }
 
 }

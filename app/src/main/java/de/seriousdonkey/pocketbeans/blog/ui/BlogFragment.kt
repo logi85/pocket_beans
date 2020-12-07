@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -24,40 +25,44 @@ import javax.inject.Inject
 
 class BlogFragment : DaggerFragment(), BlogItemOnClickListener {
 
-    private lateinit var _binding: FragmentBlogBinding
-
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
+    private lateinit var _binding: FragmentBlogBinding
+    private lateinit var _viewModel: BlogViewModel
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_blog, container, false)
-        val viewModel = ViewModelProviders.of(this, viewModelFactory).get(BlogViewModel::class.java)
-        _binding.viewModel = viewModel;
-        _binding.executePendingBindings()
-
-        _binding.blogPreviewsRv.layoutManager = LinearLayoutManager(this.context)
-
-        val adapter = BlogListAdapter(this)
-        viewModel.blogEntries.observe(this, Observer { pagedList -> adapter.submitList(pagedList) })
-        viewModel.networkState.observe(this, Observer { state ->
-            _binding.isLoading = state == NetworkState.LOADING
-            if (state == NetworkState.FAILED) {
-                Toast.makeText(this.context, "Netzwerkfehler", Toast.LENGTH_LONG)
-                    .show()
-            }
-        })
-
-        _binding.blogPreviewsRv.adapter = adapter
-
-
         return _binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _viewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(BlogViewModel::class.java)
+        _binding.viewModel = _viewModel
+        _binding.executePendingBindings()
+
+        val adapter = BlogListAdapter(this)
+        _viewModel.blogEntries.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
+        _viewModel.networkState.observe(viewLifecycleOwner, Observer { state ->
+            _binding.isLoading = state == NetworkState.LOADING
+            if (state == NetworkState.FAILED) {
+                Toast.makeText(this.context, resources.getString(R.string.network_error), Toast.LENGTH_SHORT).show()
+            }
+        })
+        _binding.blogPreviewsRv.adapter = adapter
+    }
+
     override fun onItemClicked(entry: BlogEntry) {
-        val url = "https://rocketbeans.tv/blog/${entry.id}"
+        val url = ROCKET_BEANS_API_URL + entry.id
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
         startActivity(intent)
+    }
+
+    companion object {
+        private const val ROCKET_BEANS_API_URL = "https://rocketbeans.tv/blog/"
     }
 
 }

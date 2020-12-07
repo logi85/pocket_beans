@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="de.seriousdonkey.pocketbeans.media_library.ui.show.info.ShowInfoViewModel" />
+    </data>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".media_library.ui.show.info.ShowInfoFragment"
+            tools:background="@color/black">
+
+            <ImageView
+                android:id="@+id/showInfoThumbnail"
+                imageUrl="@{viewModel.showInfo.thumbImage}"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:id="@+id/showInfoTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.showInfo.title}"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/showInfoThumbnail"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                tools:text="Du Bist!"/>
+
+            <TextView
+                android:id="@+id/showInfoDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.showInfo.description}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/showInfoTitle"
+                android:layout_marginStart="8dp"
+                tools:text="Füße vom Tisch! Jetzt werden Brettspiele gespielt. Bei Du bist! wird jede Woche aufs Neue taktiert, geblufft, gestritten und fragwürdige Allianzen geschmiedet. Auf die Würfel, fertig, los!" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/episodeRv"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/showInfoDescription"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TEST"
+                app:layout_constraintTop_toBottomOf="@id/episodeRv"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
