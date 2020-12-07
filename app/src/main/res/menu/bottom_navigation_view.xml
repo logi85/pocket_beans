@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/navigation_schedule" android:enabled="true" android:title="Zeitplan" android:icon="@drawable/baseline_calendar_today_24" />
+    <item android:id="@+id/navigation_blog" android:enabled="true" android:title="Blog" android:icon="@drawable/baseline_library_books_24" />
+    <item android:id="@+id/navigation_info" android:enabled="true" android:title="Info" android:icon="@drawable/baseline_info_24" />
+</menu>
