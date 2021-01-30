@@ -25,7 +25,7 @@ interface MediaLibraryApiService {
     @GET("media/show/{id}")
     fun getSingleShow(@Path("id") id: Int) : Observable<SingleShowResponse>
 
-    @GET("media/episode/preview/newest?order=DESC")
+    @GET("media/episode/preview/newest?order=ASC")
     fun getEpisodesByLastPublished(@Query("offset") offset: Int,
                                    @Query("limit") limit: Int) : Call<EpisodeByLastPublishedResponse>
 
